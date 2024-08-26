@@ -1,7 +1,7 @@
 export interface FormData {
   firstName: string
   lastName: string
-  age: number | null
+  driverAge: number | null
   drivingExperience: number | null
   carMaker: number | null
   carModel: number | null
@@ -10,7 +10,7 @@ export interface FormData {
 export interface FormErrors {
   firstName: string | undefined
   lastName: string | undefined
-  age: string | undefined
+  driverAge: string | undefined
   drivingExperience: string | undefined
   carMaker: string | undefined
   carModel: string | undefined

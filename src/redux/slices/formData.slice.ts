@@ -11,7 +11,7 @@ const formDataInitialState: FormDataState = {
   formData: {
     firstName: '',
     lastName: '',
-    age: null,
+    driverAge: null,
     drivingExperience: null,
     carMaker: null,
     carModel: null
@@ -19,7 +19,7 @@ const formDataInitialState: FormDataState = {
   formErrors: {
     firstName: undefined,
     lastName: undefined,
-    age: undefined,
+    driverAge: undefined,
     drivingExperience: undefined,
     carMaker: undefined,
     carModel: undefined

@@ -25,7 +25,7 @@ export const QuoteForm = () => {
     const errors = {
       firstName: formData.firstName === '' ? 'First name is required' : undefined,
       lastName: formData.lastName === '' ? 'Last name is required' : undefined,
-      age: formData.age === null ? 'Age is required' : undefined,
+      age: formData.driverAge === null ? 'Age is required' : undefined,
       drivingExperience: formData.drivingExperience === null ? 'Driving Experience is required' : undefined,
       carMaker: formData.carMaker === null ? 'Car Maker is required' : undefined,
       carModel: formData.carModel === null ? 'Car Model is required' : undefined
@@ -69,8 +69,9 @@ export const QuoteForm = () => {
         min={18}
         max={100}
         error={formErrors.age}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(setFormData({ ...formData, age: Number(e.target) }))
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          dispatch(setFormData({ ...formData, driverAge: Number(e.target.value) }))
+        }
         }
       />
       <FormField
@@ -83,7 +84,7 @@ export const QuoteForm = () => {
         max={50}
         error={formErrors.drivingExperience}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(setFormData({ ...formData, drivingExperience: Number(e.target) }))
+          dispatch(setFormData({ ...formData, drivingExperience: Number(e.target.value) }))
         }
       />
       <FormGroup widths='equal'>
