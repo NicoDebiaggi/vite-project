@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useAppSelector, useGetCarMakers, useGetQuote } from '@/hooks'
+import { useAppDispatch, useAppSelector, useGetCarMakers, useGetQuote } from '@/hooks'
 import {
   FormField,
   Form,
@@ -9,28 +8,16 @@ import {
   FormSelect,
   DropdownProps
 } from 'semantic-ui-react'
-import { FormData, FormErrors } from '@/models'
+import { setFormData, setFormErrors } from '@/redux/slices'
 
 // move the form data and errors into redux
 export const QuoteForm = () => {
+  const dispatch = useAppDispatch()
   const carMakers = useAppSelector(state => state.carMakersSlice.carMakers)
+  const formData = useAppSelector(state => state.formDataSlice.formData)
+  const formErrors = useAppSelector(state => state.formDataSlice.formErrors)
+
   useGetCarMakers()
-  const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    age: null,
-    drivingExperience: null,
-    carMaker: null,
-    carModel: null
-  })
-  const [formErrors, setFormErrors] = useState<FormErrors>({
-    firstName: undefined,
-    lastName: undefined,
-    age: undefined,
-    drivingExperience: undefined,
-    carMaker: undefined,
-    carModel: undefined
-  })
   const fetchQuote = useGetQuote(formData)
 
   const handleSend = () => {
@@ -52,7 +39,7 @@ export const QuoteForm = () => {
   }
 
   return (
-    <Form className='w-1/2 min-w-60'>
+    <Form className='w-2/3 min-w-60'>
       <FormField
         id='form-input-control-first-name'
         control={Input}
@@ -60,7 +47,7 @@ export const QuoteForm = () => {
         placeholder='First name'
         error={formErrors.firstName}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFormData({ ...formData, firstName: e.target.value })
+          dispatch(setFormData({ ...formData, firstName: e.target.value }))
         }
       />
       <FormField
@@ -70,7 +57,7 @@ export const QuoteForm = () => {
         placeholder='Last name'
         error={formErrors.lastName}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFormData({ ...formData, lastName: e.target.value })
+          dispatch(setFormData({ ...formData, lastName: e.target.value }))
         }
       />
       <FormField
@@ -83,7 +70,7 @@ export const QuoteForm = () => {
         max={100}
         error={formErrors.age}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFormData({ ...formData, age: Number(e.target) })
+          dispatch(setFormData({ ...formData, age: Number(e.target) }))
         }
       />
       <FormField
@@ -96,7 +83,7 @@ export const QuoteForm = () => {
         max={50}
         error={formErrors.drivingExperience}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFormData({ ...formData, drivingExperience: Number(e.target) })
+          dispatch(setFormData({ ...formData, drivingExperience: Number(e.target) }))
         }
       />
       <FormGroup widths='equal'>
@@ -111,7 +98,7 @@ export const QuoteForm = () => {
           placeholder='Car Maker'
           error={formErrors.carMaker}
           onChange={(_e: unknown, data: DropdownProps) =>
-            setFormData({ ...formData, carMaker: data.value as number })
+            dispatch(setFormData({ ...formData, carMaker: data.value as number }))
           }
         />
         <FormSelect
@@ -130,7 +117,7 @@ export const QuoteForm = () => {
           placeholder='Car Model'
           error={formErrors.carModel}
           onChange={(_e: unknown, data: DropdownProps) =>
-            setFormData({ ...formData, carModel: data.value as number })
+            dispatch(setFormData({ ...formData, carModel: data.value as number }))
           }
         />
       </FormGroup>

@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { carMakersReducer, quoteReducer } from './slices'
+import { carMakersReducer, formDataReducer, quoteReducer } from './slices'
 
 export const store = configureStore({
   reducer: {
     carMakersSlice: carMakersReducer,
-    quoteSlice: quoteReducer
+    quoteSlice: quoteReducer,
+    formDataSlice: formDataReducer
   }
 })
 
